@@ -13,27 +13,6 @@ public class Main {
         first.addArc("x2", "x4", 3);
         first.addArc("x1", "x4", 2);
         first.addArc("x5", "x1", 1);
-        first.info();
-        System.out.println();
-        first.deleteArc("x1", "x4");
-        first.deleteArc("x5", "x1");
-        first.info();
-        System.out.println();
-        first.deleteVertex("x1");
-        first.deleteVertex("x4");
-        first.info();
-        System.out.println();
-        first.deleteArc("x2", "x4");
-        first.info();
-        System.out.println();
-        first.deleteVertex("x4");
-        first.info();
-        System.out.println();
-        first.editVertexName("x1", "new_x1");
-        first.editArcWeight("new_x1", "x3", 33);
-        first.info();
-        System.out.println();
-        System.out.println(first.getOutgoingArcs("new_x1"));
-        System.out.println(first.getEnteringArcs("new_x1"));
+        System.out.println(first.toString());
     }
 }

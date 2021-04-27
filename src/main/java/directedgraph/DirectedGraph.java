@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class DirectedGraph {
 
-    Map<Vertex, List<Arc>> graph = new HashMap<>();
+    final Map<Vertex, List<Arc>> graph = new HashMap<>();
 
     public static class Vertex {
         String name;
@@ -34,9 +34,9 @@ public class DirectedGraph {
     }
 
     public static class Arc {
-        Vertex from;
-        Vertex to;
-        int weight;
+        final Vertex from;
+        final Vertex to;
+        final int weight;
 
         public Arc(Vertex from, Vertex to, int weight) {
             this.from = from;
@@ -68,11 +68,11 @@ public class DirectedGraph {
         }
     }
 
-    public boolean hasVertex(String name) {
+    private boolean hasVertex(String name) {
         return graph.containsKey(new Vertex(name));
     }
 
-    public boolean hasArc(String from, String to) {
+    private boolean hasArc(String from, String to) {
         if (hasVertex(from) && hasVertex(to)) {
             for (Arc arc : graph.get(new Vertex(from))) {
                 if (arc.from.equals(new Vertex(from)) && arc.to.equals(new Vertex(to))) {
@@ -133,7 +133,7 @@ public class DirectedGraph {
         }
     }
 
-    public void editArcName(String from, String to, String new_from, String new_to) {
+    private void editArcName(String from, String to, String new_from, String new_to) {
         for (Arc arc : graph.get(new Vertex(from))) {
             if (arc.from.equals(new Vertex(from)) && arc.to.equals(new Vertex(to))) {
                 deleteArc(from, to);
@@ -172,14 +172,24 @@ public class DirectedGraph {
         } else return new ArrayList<>();
     }
 
-    public void info() {
+    public List<String> getVertexes(){
+        List<String> res = new ArrayList<>();
         for(Map.Entry<Vertex, List<Arc>> item : graph.entrySet()) {
-            System.out.println("Vertex: " + item.getKey() + "\t\tArcs: " + item.getValue());
+            res.add(item.getKey().toString());
         }
+        return res;
     }
 
-    public Map<Vertex, List<Arc>> getMap(){
-        return this.graph;
+    public List<String> getArcs(){
+        List<String> res = new ArrayList<>();
+        for(Map.Entry<Vertex, List<Arc>> item : graph.entrySet()) {
+            for (Arc arc : item.getValue()){
+                if (!res.contains(arc.toString())){
+                    res.add(arc.toString());
+                }
+            }
+        }
+        return res;
     }
 
     @Override
